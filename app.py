@@ -1,110 +1,145 @@
-import streamlit as st
+import os
 import pandas as pd
+import streamlit as st
 
 st.set_page_config(
-    page_title="Cars Analytics Dashboard",
+    page_title="🚗 Cars Analytics Dashboard",
     page_icon="🚗",
     layout="wide"
 )
 
-# ---------------- Sidebar ----------------
-st.sidebar.title("🚗 Cars Analytics Dashboard")
-st.sidebar.markdown("---")
-
-page = st.sidebar.radio(
-    "Navigation",
-    ["🏠 Home", "📊 Dashboard", "📁 Dataset", "📥 Download"]
-)
-
-# ---------------- Load Dataset ----------------
+# -----------------------------
+# Functions
+# -----------------------------
 @st.cache_data
 def load_data():
+    if not os.path.exists("CARS.csv"):
+        return None
     return pd.read_csv("CARS.csv")
 
 df = load_data()
 
-# ---------------- Home ----------------
+# -----------------------------
+# Sidebar
+# -----------------------------
+st.sidebar.title("🚗 Cars Analytics")
+st.sidebar.markdown("---")
+
+page = st.sidebar.radio(
+    "Navigation",
+    [
+        "🏠 Home",
+        "📊 Dashboard",
+        "📁 Dataset",
+        "📥 Download"
+    ]
+)
+
+# -----------------------------
+# HOME
+# -----------------------------
 if page == "🏠 Home":
 
     st.title("🚗 Cars Analytics Dashboard")
 
     st.markdown("""
-### 📊 Power BI Business Intelligence Project
-
-This dashboard analyzes automobile data using **Power BI**, **Power Query**, and **DAX** to generate business insights.
-
-### ✨ Features
-- 🚗 Manufacturer Analysis
-- 💰 MSRP & Invoice Analysis
-- ⚙️ Engine Performance
-- ⛽ Fuel Efficiency
-- 🌍 Origin Analysis
-- 📈 Interactive Visualizations
+Analyze vehicle pricing, fuel efficiency, engine performance,
+manufacturer trends and market insights using **Power BI**.
 """)
 
-    c1, c2, c3, c4 = st.columns(4)
+    if df is not None:
 
-    c1.metric("🚗 Total Cars", len(df))
-    c2.metric("🏭 Manufacturers", df["Make"].nunique())
-    c3.metric("🌍 Origins", df["Origin"].nunique())
-    c4.metric("🚘 Types", df["Type"].nunique())
+        c1, c2, c3, c4 = st.columns(4)
 
-# ---------------- Dashboard ----------------
+        c1.metric("🚗 Total Cars", len(df))
+        c2.metric("🏭 Manufacturers", df["Make"].nunique())
+        c3.metric("🌍 Origins", df["Origin"].nunique())
+        c4.metric("🚘 Types", df["Type"].nunique())
+
+        st.markdown("---")
+
+        st.subheader("Dataset Preview")
+        st.dataframe(df.head(), use_container_width=True)
+
+    else:
+        st.error("CARS.csv not found.")
+
+# -----------------------------
+# DASHBOARD
+# -----------------------------
 elif page == "📊 Dashboard":
 
-    st.title("📊 Dashboard Preview")
+    st.title("📊 Dashboard Screens")
 
-    st.subheader("🏠 Executive Dashboard")
-    st.image("page1.png", use_container_width=True)
+    images = [
+        ("Executive Dashboard", "page1.png"),
+        ("Performance Dashboard", "page2.png"),
+        ("Premium Dashboard", "page3.png")
+    ]
 
-    st.subheader("🚘 Performance Dashboard")
-    st.image("page2.png", use_container_width=True)
+    for title, img in images:
 
-    st.subheader("🏎 Premium Vehicle Dashboard")
-    st.image("page3.png", use_container_width=True)
+        st.subheader(title)
 
-# ---------------- Dataset ----------------
+        if os.path.exists(img):
+            st.image(img, use_container_width=True)
+        else:
+            st.warning(f"{img} not found")
+
+# -----------------------------
+# DATASET
+# -----------------------------
 elif page == "📁 Dataset":
 
     st.title("📁 Cars Dataset")
 
-    st.dataframe(df, use_container_width=True)
+    if df is not None:
+        st.dataframe(df, use_container_width=True)
 
-    st.markdown("### Dataset Statistics")
+        st.subheader("Statistics")
+        st.write(df.describe())
+    else:
+        st.error("Dataset not found.")
 
-    st.write(df.describe())
+# -----------------------------
+# DOWNLOADS
+# -----------------------------
+elif page == "📥 Download":
 
-# ---------------- Download ----------------
-else:
+    st.title("📥 Downloads")
 
-    st.title("📥 Download Project")
+    if os.path.exists("cars 1.pbix"):
+        with open("cars 1.pbix", "rb") as file:
+            st.download_button(
+                "⬇ Download Power BI (.pbix)",
+                file,
+                file_name="Cars_Analytics_Dashboard.pbix"
+            )
+    else:
+        st.warning("PBIX file not found.")
 
-    with open("cars 1.pbix", "rb") as f:
-        st.download_button(
-            label="⬇ Download Power BI Project",
-            data=f,
-            file_name="Cars_Analytics_Dashboard.pbix",
-            mime="application/octet-stream"
-        )
+    if os.path.exists("CARS.csv"):
+        with open("CARS.csv", "rb") as file:
+            st.download_button(
+                "⬇ Download Dataset",
+                file,
+                file_name="CARS.csv"
+            )
 
-    with open("CARS.csv", "rb") as f:
-        st.download_button(
-            label="⬇ Download Dataset",
-            data=f,
-            file_name="CARS.csv",
-            mime="text/csv"
-        )
-
+# -----------------------------
+# Footer
+# -----------------------------
 st.markdown("---")
 
 st.markdown(
-    """
+"""
 <div align='center'>
 
 ### 🚗 Cars Analytics Dashboard
 
-Built with ❤️ using **Power BI**, **DAX**, **Power Query**, and **Streamlit**
+Built with ❤️ using Power BI • DAX • Power Query • Streamlit
 
 </div>
 """,
-unsafe_allow_html=True)
+unsafe_allow_html=True
+)
