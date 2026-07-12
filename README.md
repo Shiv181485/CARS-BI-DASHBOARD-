@@ -252,7 +252,7 @@ Business Insights
 
 # 👨‍💻 Author
 
-**Randhir Singh Shekhawat**
+**SHIVAM R.GHATE**
 
 🎓 IT Engineering Student
 
