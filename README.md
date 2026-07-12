@@ -105,16 +105,126 @@ Highlights premium vehicles with the highest MSRP and horsepower.
 
 # 📂 Project Structure
 
+---
+
+# 🏗️ Technical Architecture
+
 ```text
-Cars-Analytics-Dashboard/
-│── README.md
-│── cars 1.pbix
-│── CARS.csv
-│── page1.png
-│── page2.png
-└── page3.png
+                📄 CSV Dataset
+                     │
+                     ▼
+        🔄 Power Query (ETL Process)
+     • Data Cleaning
+     • Data Transformation
+     • Data Validation
+                     │
+                     ▼
+          🗂️ Data Model (Power BI)
+                     │
+                     ▼
+          ⚡ DAX Measures & KPIs
+                     │
+                     ▼
+      📊 Interactive Dashboard Reports
 ```
 
+---
+
+# ⚙️ Technical Implementation
+
+| 🔧 Component | 📌 Description |
+|-------------|----------------|
+| 📂 Data Source | CSV Dataset |
+| 🔄 ETL Tool | Power Query |
+| 📊 Visualization Tool | Microsoft Power BI Desktop |
+| ⚡ Calculation Engine | DAX (Data Analysis Expressions) |
+| 🎛️ Interactive Elements | Slicers, Filters, Cross Filtering |
+| 📈 Charts Used | Bar, Column, Donut, Line, Stacked Bar, KPI Cards |
+| 🎨 UI Design | Modern Dark Theme with Interactive Layout |
+
+---
+
+# 📊 Dashboard Workflow
+
+```text
+CSV Dataset
+     │
+     ▼
+Power Query
+(Data Cleaning & Transformation)
+     │
+     ▼
+Data Modeling
+(Relationships & Data Types)
+     │
+     ▼
+DAX Measures
+(KPIs & Business Calculations)
+     │
+     ▼
+Interactive Visualizations
+     │
+     ▼
+Business Insights
+```
+
+---
+
+# 🚀 Technologies Used
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/Microsoft-Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/>
+<img src="https://img.shields.io/badge/DAX-Analytics-blue?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Power_Query-ETL-green?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/CSV-Dataset-orange?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Data_Modeling-PowerBI-red?style=for-the-badge"/>
+
+</p>
+
+---
+
+# 💡 Technical Highlights
+
+✅ Data Cleaning using **Power Query**
+
+✅ Interactive Dashboard Development
+
+✅ DAX Measures for Business KPIs
+
+✅ Dynamic Cross Filtering
+
+✅ Responsive Report Layout
+
+✅ Advanced Data Visualization
+
+✅ Business Intelligence Reporting
+
+✅ Interactive Slicers & Filters
+
+✅ Professional Dashboard Design
+
+---
+
+# 📈 Business Intelligence Capabilities
+
+📊 KPI Monitoring
+
+📈 Trend Analysis
+
+💰 Pricing Analysis
+
+⚙️ Engine Performance Analysis
+
+⛽ Fuel Efficiency Analysis
+
+🌍 Manufacturer & Origin Analysis
+
+🚘 Vehicle Category Analysis
+
+📉 Comparative Business Analytics
+
+---
 ---
 
 # 💡 Skills Demonstrated
